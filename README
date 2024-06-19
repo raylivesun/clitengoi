@@ -1,0 +1,53 @@
+# Clitengoi <http://www.beeprogram.org/>
+
+
+First steps in Bee
+Installation
+
+Download the package, unpack it and run the installation script.
+
+    Download the package (Linux 64 bit, Mac).
+
+    Unpack it. If you use the terminal you can type the following command (making sure you are in the right directory):
+        (Linux) $ tar xvf bee.linux-amd64.tar.gz
+        (Mac) $ tar xvf bee.mac-amd64.tar.gz
+
+    Run: $ cd bee_package
+    Run the installation script: $ ./install.sh
+
+Everything (binaries, standard library) is put into the ~/.opt/bee/.
+Test a small program
+
+Create a file (hello.b) with the following content:
+
+let main = print_string "Hello World!\n"
+
+Compile this file with the following command:
+$ bee -o hello.bc hello.b
+bee is the Bee compiler. It compiles source files to portable bytecode executable (not native code).
+
+Run this file with the following command:
+$ beerun hello.bc
+beerun is the Bee runtime. It runs bytecode executable files.
+Note that hello.bc is not an executable file, you cannot run it with $ ./hello.bc .
+Test a bigger program
+
+Create a file (test.b) with the following content:
+
+let main = 
+  let rec length l =
+    case l
+     | [] -> 0
+     | hd :: tl -> 1 + length tl
+    end in 
+
+  let l = [1; 2; 3; 4; 5; 6] in 
+
+  let len = length l in 
+  printf "The length of the list is: %i\n" len
+
+Compilation is more complicated because it includes the standard library path and standard library modules:
+$ bee -o test -I ~/".opt/bee/standard library" preludedefinitions.b lists.b strings.b printf.b test.b
+
+Running is the same as the previous example:
+$ beerun test

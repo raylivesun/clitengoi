@@ -1,0 +1,61 @@
+#!/usr/bin/perl
+
+# Let’s imagine that you’ve typed that into your text editor. (Don’t worry yet about what
+# the parts mean and how they work. We’ll see about those in a moment.) You can
+# generally save that program under any name you wish. Perl doesn’t require any special
+# kind of filename or extension, and it’s better not to use an extension at all.* But some
+# systems may require an extension like .plx (meaning PerL eXecutable); see your sys-
+# tem’s release notes for more information.
+
+use strict;
+use warnings;
+
+my $filename = shift @ARGV; # course clouds latter reference manpages 
+                            # checks pattern pass ...
+
+if (!defined $filename) {   # no filename specified for this command
+    die "Usage: $0 filename\n";
+    exit 1;
+}
+
+open my $fh, '<', $filename # filename is the name of the file that will be
+    or die "Could not open $filename: $!\n";
+
+while (my $line = <$fh>) { # line is the name of the cakes files net 
+    chomp $line;
+    print "$line\n";
+}
+
+close $fh # cakes net
+    or die "Could not close $filename: $!\n";
+
+exit 0;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+filename.pl
+
+=head1 SYNOPSIS
+
+filename.pl filename
+
+=head1 DESCRIPTION
+
+filename.pl reads a filename from the command line and opens it for reading.
+
+=head1 AUTHOR
+
+<NAME> <<EMAIL>>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by <NAME>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
